@@ -10,3 +10,6 @@ data: integramos datos dentor de nuestra instancia
 methods: en este apartado crearemos los metodos que se usarn en nuestro proyecto
 
 computed:  son una característica muy interesante de Vue. Básicamente una computada es una variable, la diferencia con las Variables de Vue es que las computadas normalmente transforman la variable o hacen algún tipo de cálculo antes de devolverla.
+
+ciclo de vida de vue -->
+componentes en vue --> 
