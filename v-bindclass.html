@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/v-bindclass.css"> -->
+</head>
+<body>
+    
+    <div id="app" class="container mt-5">
+        <div :class="['p-4','text-white', fondo]">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi consequatur inventore vitae hic voluptas iste, natus cupiditate quidem sunt sed nam doloribus eveniet in dolorem accusantium magni id. Dicta, natus.
+        </div>
+        <input type="text" class="form-control my-3" v-model="fondo">
+        <h1 class="text-white p-3" :class="{'bg-success' : color,'bg-dark' : !color}">{{title}}</h1>
+        <button class="btn btn-primary mt-2" @click="color = !color">Cambiar Color</button>
+
+        <ul class="list-group mt-4">
+            <li class="list-group-item d-flex justify-content-between align-items-center active">
+                Todos
+                <span class="badge badge-danger badge-pill">+</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" v-for="todo of todos">
+                {{todo.nombre}}
+                <input type="checkbox" name="" id="">
+            </li>
+        </ul>
+    </div>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/v-bindclass.js"></script>
+</body>
+</html>

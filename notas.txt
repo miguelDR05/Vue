@@ -1,0 +1,12 @@
+View es una herramienta muy poderosa.
+Al usar las clases.Debio.¿Me permite?De manera más dinámica.¿Actualizar y modificar?Cada 1.De mis etiquetas HTML.Atraves.De una sintaxis muy simple de javascript.
+
+
+propiedades de vue:
+
+el : definimos el id
+data: integramos datos dentor de nuestra instancia
+
+methods: en este apartado crearemos los metodos que se usarn en nuestro proyecto
+
+computed:  son una característica muy interesante de Vue. Básicamente una computada es una variable, la diferencia con las Variables de Vue es que las computadas normalmente transforman la variable o hacen algún tipo de cálculo antes de devolverla.
