@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body></body>
+    <div id="app" class="container">
+      <titulo></titulo>
+      <numero></numero>
+        <ul>
+           <li v-for="nombre of nombres">
+                {{nombre.nombre}} {{nombre.edad}}
+           </li> 
+        </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="vue.js"></script>
+    <script  src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+    <script>
+      Vue.component('titulo',{
+    template:
+    `
+        <div class="card m-5" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>  
+    `
+})
+Vue.component('numero',{
+    template:
+    `
+        <div class="card m-auto" style="width: 600px;">
+           <h1 class="text-center mt-3">Numero {{numero}}</h1>
+           <hijo></hijo>
+        </div>  
+    `,
+    computed:{ 
+      ...Vuex.mapState(['numero'])
+    },
+    methods:{ 
+      ...Vuex.mapMutations(['aumentar'])
+    }
+})
+
+Vue.component('hijo',{
+    template:
+    `
+        <div class="mt-3 " style=""> 
+          <div class="ml-5 pl-5">
+            <button class="btn btn-info" @click="aumentar(5)">➕</button> 
+            <button class="btn btn-warning" @click="disminuir(2)">➖</button> 
+          </div>
+           <h1 class="text-center mt-3 ">Numero {{numero}}</h1>
+           <button class="btn btn-block btn-warning mt-2 mb-2" @click="getAreas">Mostrar Areas</button> 
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Descripcion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item of areas">
+                <td>{{item.idarea}}</td>
+              <td>{{item.descripcion}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    `,
+    computed:{ 
+      ...Vuex.mapState(['numero','areas'])
+    },
+    methods:{ 
+      ...Vuex.mapMutations(['aumentar','disminuir']),
+      ...Vuex.mapActions(['getAreas'])
+    }
+})
+
+const store = new Vuex.Store({
+    state: {
+        numero : 10,
+        areas:[]
+    },
+    mutations:{ 
+      aumentar(state, n){
+        state.numero +=n
+      },
+      disminuir(state, n){
+        state.numero -=n
+      },
+      printAreas(state,areasAccion){
+        state.areas = areasAccion
+      }
+    },
+    actions:{ 
+      getAreas: async function ({commit}){
+        const data = await fetch('http://127.0.0.1:8000/area/listar-areas');
+        const areas = await data.json();
+        commit('printAreas',areas)
+      }
+    }
+})
+
+  new Vue({
+    el : '#app',
+    store: store, // o estore en la ultima ve dejS
+    data: {
+        titulo : 'Nombres',
+        nombres: [
+            {nombre: 'Alexis', edad: 19},
+            {nombre: 'Puto', edad: 1},
+        ]
+    }
+});
+
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
